@@ -12,6 +12,8 @@ export const CommentSchema = z.array(
             selftext: z.string().optional(),
             body: z.string().optional(),
             url: z.string().optional(),
+            author: z.string().optional(),
+            created_utc: z.number().optional()
           })
         })
       )

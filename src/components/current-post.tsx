@@ -64,18 +64,26 @@ export default function CurrentPost() {
       </header>
       <main>
         <ul className='flex flex-col gap-4'>
-          {comments?.map(({ data }, index) => (
-            <li key={index}>
-              <Card>
-                <CardContent>
-                  <CardHeader className='px-0'>
-                    <CardTitle>Comment</CardTitle>
-                  </CardHeader>
-                  <Markdown>{data.body}</Markdown>
-                </CardContent>
-              </Card>
-            </li>
-          ))}
+          {comments?.map(({ data }, index) => {
+            const date = data.created_utc ? new Date(data.created_utc) : null
+            const lastUpdated = date ? date.toLocaleString() : null
+            return (
+              <li key={index}>
+                <Card>
+                  <CardContent>
+                    <CardHeader className='flex-row items-center gap-2 px-0 pb-0 space-y-0 text-zinc-400'>
+                      <CardTitle className='text-lg text-zinc-400 font-normal'>
+                        {data.author}
+                      </CardTitle>
+                      <span>·</span>
+                      <p className='text-sm p-0 mt-0'>{lastUpdated}</p>
+                    </CardHeader>
+                    <Markdown>{data.body}</Markdown>
+                  </CardContent>
+                </Card>
+              </li>
+            )
+          })}
         </ul>
       </main>
 
