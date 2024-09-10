@@ -19,14 +19,15 @@ type State =
   | { status: 'idle' }
   | { status: 'loading' }
   | { status: 'error'; error: Error }
-  | { status: 'success' }
+  | { status: 'close' }
 
 export default function AddFeedButton() {
-  const [state, setState] = useState<State>({ status: 'idle' })
+  const [state, setState] = useState<State>({ status: 'close' })
   const { addFeed } = useFeedStore(({ addFeed }) => ({ addFeed }))
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const formData = new FormData(event.currentTarget)
+    const form = event.currentTarget
+    const formData = new FormData(form)
     const name = formData.get('name')
     if (typeof name !== 'string' || !name) {
       setState({ status: 'error', error: new Error('Name is required') })
@@ -52,9 +53,13 @@ export default function AddFeedButton() {
       setState({ status: 'error', error: new Error('An error occurred') })
       return
     }
+    setState({ status: 'close' })
   }
   return (
-    <Dialog>
+    <Dialog
+      open={state.status !== 'close'}
+      onOpenChange={open => setState({ status: open ? 'idle' : 'close' })}
+    >
       <DialogTrigger asChild>
         <Button title='Add feed'>+</Button>
       </DialogTrigger>
