@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import FeedOptionsMenu from './feed-options-menu'
 import { FeedData, FeedSchema } from '@/app/api/r/[feedName]/route'
 import { ChevronUp } from 'lucide-react'
@@ -26,26 +26,28 @@ export default function Feed({ feedName }: FeedProps) {
   const [feed, setFeed] = useState<FeedData | null>(null)
   const [state, setState] = useState<State>({ status: 'idle' })
 
-  useEffect(() => {
-    const displayData = async () => {
-      setState({ status: 'loading' })
-      const data = await getFeed(feedName)
-      if (data instanceof Error) {
-        setState({ status: 'error', error: data })
-        return
-      }
-      setFeed(data)
-      setState({ status: 'success' })
+  const displayData = useCallback(async () => {
+    setState({ status: 'loading' })
+    setFeed(null)
+    const data = await getFeed(feedName)
+    if (data instanceof Error) {
+      setState({ status: 'error', error: data })
+      return
     }
-    displayData()
+    setFeed(data)
+    setState({ status: 'success' })
   }, [feedName])
+
+  useEffect(() => {
+    displayData()
+  }, [feedName, displayData])
 
   return (
     <li className='w-full max-w-lg h-full border-r-2'>
       <article className='flex flex-col py-4 gap-4 w-full h-full'>
         <header className='flex gap-4 items-center px-4 justify-between'>
           <h2>{feedName}</h2>
-          <FeedOptionsMenu feedName={feedName} />
+          <FeedOptionsMenu feedName={feedName} onRefresh={displayData} />
         </header>
         <main>
           {state.status === 'loading' && <p>Loading...</p>}

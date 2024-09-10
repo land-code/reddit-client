@@ -9,7 +9,12 @@ import {
 import { Button } from './ui/button'
 import DeleteFeedButton from './delete-feed-button'
 
-export default function FeedOptionsMenu({ feedName }: { feedName: string }) {
+type FeedOptionsMenuProps = {
+  feedName: string
+  onRefresh: () => void
+}
+
+export default function FeedOptionsMenu({ feedName, onRefresh }: FeedOptionsMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -17,7 +22,7 @@ export default function FeedOptionsMenu({ feedName }: { feedName: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={onRefresh}>
             <RefreshCw className='mr-2 h-4 w-4' />
             <span>Refresh</span>
           </DropdownMenuItem>
