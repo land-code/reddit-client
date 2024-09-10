@@ -3,6 +3,7 @@ import AddFeedButton from './add-feed-button'
 import { useEffect, useState } from 'react'
 import { CommentData } from '@/app/api/comments/[commentId]/route'
 import Markdown from 'react-markdown'
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 type State =
   | { status: 'idle' }
@@ -39,21 +40,44 @@ export default function CurrentPost() {
   const postTitle = firstCommentData?.title
   const postDescription = firstCommentData?.selftext
   const postUrl = firstCommentData?.url
-  console.log(firstCommentData)
+
+  const comments = comment?.[1].data.children?.slice(1)
+
+  console.log(comments)
+
   return (
-    <article>
+    <article className='flex flex-col gap-4'>
       <header className='flex flex-col gap-4'>
         <div className='flex gap-4 items-center'>
           <AddFeedButton />
           <h1>{postTitle}</h1>
         </div>
-        <a href={postUrl} target='_blank' rel='noreferrer noopener' className='text-blue-500'>
+        <a
+          href={postUrl}
+          target='_blank'
+          rel='noreferrer noopener'
+          className='text-blue-500'
+        >
           {postUrl}
         </a>
-        <p>
-          <Markdown>{postDescription}</Markdown>
-        </p>
+        <Markdown>{postDescription}</Markdown>
       </header>
+      <main>
+        <ul className='flex flex-col gap-4'>
+          {comments?.map(({ data }, index) => (
+            <li key={index}>
+              <Card>
+                <CardContent>
+                  <CardHeader className='px-0'>
+                    <CardTitle>Comment</CardTitle>
+                  </CardHeader>
+                  <Markdown>{data.body}</Markdown>
+                </CardContent>
+              </Card>
+            </li>
+          ))}
+        </ul>
+      </main>
 
       {state.status === 'loading' && <p>Loading...</p>}
       {state.status === 'error' && <p>{state.error.message}</p>}
