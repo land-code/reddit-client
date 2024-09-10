@@ -28,7 +28,7 @@ export default function AddFeedButton() {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
-    const name = formData.get('name')
+    const name = formData.get('feed-name')
     if (typeof name !== 'string' || !name) {
       setState({ status: 'error', error: new Error('Name is required') })
       return
@@ -75,12 +75,12 @@ export default function AddFeedButton() {
         <form onSubmit={onSubmit}>
           <div className='grid gap-4 py-4'>
             <div className='grid grid-cols-4 items-center gap-4'>
-              <Label htmlFor='name' className='text-right'>
-                Name
+              <Label htmlFor='feed-name' className='text-right'>
+                Feed name
               </Label>
               <Input
-                name='name'
-                id='name'
+                name='feed-name'
+                id='feed-name'
                 defaultValue='r/programming'
                 className='col-span-3'
               />
