@@ -65,7 +65,7 @@ export default function CurrentPost() {
       <main>
         <ul className='flex flex-col gap-4'>
           {comments?.map(({ data }, index) => {
-            const date = data.created_utc ? new Date(data.created_utc) : null
+            const date = data.created_utc ? new Date(data.created_utc * 1000) : null
             const lastUpdated = date ? date.toLocaleString() : null
             return (
               <li key={index}>
