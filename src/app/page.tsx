@@ -13,7 +13,7 @@ export default function Home() {
           <Feed key={name} feedName={name} />
         ))}
       </ul>
-      <aside className='h-full w-[600px] p-4 sm:p-8'>
+      <aside className='h-full w-[800px] p-4 sm:p-8'>
         <CurrentPost />
       </aside>
     </div>
