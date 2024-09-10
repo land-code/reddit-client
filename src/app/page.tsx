@@ -1,6 +1,6 @@
 'use client'
 
-import AddFeedButton from '@/components/add-feed-button'
+import CurrentPost from '@/components/current-post'
 import Feed from '@/components/feed'
 import { useFeedStore } from '@/feedStore'
 
@@ -14,7 +14,7 @@ export default function Home() {
         ))}
       </ul>
       <aside className='h-full w-[600px] p-4 sm:p-8'>
-        <AddFeedButton />
+        <CurrentPost />
       </aside>
     </div>
   )
