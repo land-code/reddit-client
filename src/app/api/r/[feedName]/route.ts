@@ -2,22 +2,22 @@ import { z } from 'zod'
 
 const FeedName = z.string()
 
+export const PostItemSchema = z.object({
+  title: z.string(),
+  url: z.string(),
+  // selftext: z.string().nullable(),
+  id: z.string(),
+  ups: z.number()
+})
+
 export const FeedSchema = z.object({
   kind: z.string(),
   data: z.object({
-    children: z.array(
-      z.object({
-        data: z.object({
-          title: z.string(),
-          url: z.string(),
-          // selftext: z.string().nullable(),
-          ups: z.number()
-        })
-      })
-    )
+    children: z.array(z.object({ data: PostItemSchema }))
   })
 })
 
+export type PostData = z.infer<typeof PostItemSchema>
 export type FeedData = z.infer<typeof FeedSchema>
 
 export const GET = async (

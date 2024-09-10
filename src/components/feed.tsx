@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import FeedOptionsMenu from './feed-options-menu'
 import { FeedData, FeedSchema } from '@/app/api/r/[feedName]/route'
-import { ChevronUp } from 'lucide-react'
+import PostItem from './post-item'
 
 type FeedProps = {
   feedName: string
@@ -55,19 +55,11 @@ export default function Feed({ feedName }: FeedProps) {
             <p className='text-red-500'>Error: {state.error.message}</p>
           )}
           {feed && (
-            <ul className='flex flex-col gap-4'>
+            <ul className='flex flex-col'>
               {feed.data.children
                 .slice(0, 10)
-                .map(({ data: { title, ups } }, index) => (
-                  <li key={index} className='border-b-2 px-4 py-2'>
-                    <article className='flex items-center gap-8'>
-                      <div className='flex flex-col items-center'>
-                        <ChevronUp size={16} />
-                        {ups}
-                      </div>
-                      <h1>{title}</h1>
-                    </article>
-                  </li>
+                .map(({ data }, index) => (
+                  <PostItem post={data} key={index} />
                 ))}
             </ul>
           )}
