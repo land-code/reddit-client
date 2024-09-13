@@ -15,40 +15,34 @@ import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { useFeedStore } from '@/feedStore'
 import { DialogState } from '@/types/DialogState'
+import { FeedNameSchema } from '@/schemas/FeedNameSchema'
+import { ZodError } from 'zod'
 
 export default function AddFeedButton() {
   const [state, setState] = useState<DialogState>({ status: 'close' })
   const { addFeed } = useFeedStore(({ addFeed }) => ({ addFeed }))
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const form = event.currentTarget
-    const formData = new FormData(form)
+    const formData = new FormData(event.currentTarget)
     const name = formData.get('feed-name')
-    if (typeof name !== 'string' || !name) {
-      setState({ status: 'error', error: new Error('Name is required') })
-      return
-    }
-    if (!name.startsWith('r/')) {
-      setState({
-        status: 'error',
-        error: new Error('Name must start with "r/"')
-      })
-      return
-    }
+
     setState({ status: 'loading' })
+
     try {
-      addFeed({
-        name: name
-      })
+      const validName = FeedNameSchema.parse(name)
+      addFeed({ name: validName })
+      setState({ status: 'close' })
     } catch (error) {
+      if (error instanceof ZodError) {
+        const fieldErrors = error.errors.map(({ message }) => message)
+        setState({ status: 'error', error: new Error(fieldErrors.join(', ')) })
+      }
       if (error instanceof Error) {
         setState({ status: 'error', error })
-        return
       }
       setState({ status: 'error', error: new Error('An error occurred') })
-      return
     }
-    setState({ status: 'close' })
   }
   return (
     <Dialog
