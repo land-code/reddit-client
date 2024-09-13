@@ -1,7 +1,7 @@
 import { useFeedStore } from '@/feedStore'
 import AddFeedButton from './add-feed-button'
 import { useEffect, useState } from 'react'
-import { CommentData } from '@/app/api/comments/[commentId]/route'
+import { CommentData } from '@/types/CommentData'
 import Markdown from 'react-markdown'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 

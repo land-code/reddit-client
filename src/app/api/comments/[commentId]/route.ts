@@ -1,27 +1,4 @@
-import { z } from 'zod'
-
-const CommendId = z.string()
-
-export const CommentSchema = z.array(
-  z.object({
-    data: z.object({
-      children: z.array(
-        z.object({
-          data: z.object({
-            title: z.string().optional(),
-            selftext: z.string().optional(),
-            body: z.string().optional(),
-            url: z.string().optional(),
-            author: z.string().optional(),
-            created_utc: z.number().optional()
-          })
-        })
-      )
-    })
-  })
-)
-
-export type CommentData = z.infer<typeof CommentSchema>
+import { CommendId, CommentSchema } from '@/schemas/CommentSchema'
 
 export const GET = async (
   req: Request,
