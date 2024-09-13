@@ -14,15 +14,10 @@ import {
 import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { useFeedStore } from '@/feedStore'
-
-type State =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'error'; error: Error }
-  | { status: 'close' }
+import { DialogState } from '@/types/DialogState'
 
 export default function AddFeedButton() {
-  const [state, setState] = useState<State>({ status: 'close' })
+  const [state, setState] = useState<DialogState>({ status: 'close' })
   const { addFeed } = useFeedStore(({ addFeed }) => ({ addFeed }))
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

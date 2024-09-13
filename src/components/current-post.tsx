@@ -6,12 +6,7 @@ import Markdown from 'react-markdown'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 
 import markdownStyles from '@/markdown-styles.module.css'
-
-type State =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'error'; error: Error }
-  | { status: 'success' }
+import { State } from '@/types/State'
 
 export default function CurrentPost() {
   const [comment, setComment] = useState<CommentData | null>(null)

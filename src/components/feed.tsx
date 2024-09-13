@@ -3,16 +3,11 @@ import FeedOptionsMenu from './feed-options-menu'
 import { FeedSchema } from '@/schemas/FeedSchema'
 import PostItem from './post-item'
 import { FeedData } from '@/types/PostSchema'
+import { State } from '@/types/State'
 
 type FeedProps = {
   feedName: string
 }
-
-type State =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'error'; error: Error }
-  | { status: 'success' }
 
 async function getFeed(feedName: string) {
   try {
