@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import FeedOptionsMenu from './feed-options-menu'
-import { FeedData, FeedSchema } from '@/app/api/r/[feedName]/route'
+import { FeedSchema } from '@/schemas/FeedSchema'
 import PostItem from './post-item'
+import { FeedData } from '@/types/PostSchema'
 
 type FeedProps = {
   feedName: string
