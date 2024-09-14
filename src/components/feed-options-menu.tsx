@@ -14,7 +14,10 @@ type FeedOptionsMenuProps = {
   onRefresh: () => void
 }
 
-export default function FeedOptionsMenu({ feedName, onRefresh }: FeedOptionsMenuProps) {
+export default function FeedOptionsMenu({
+  feedName,
+  onRefresh
+}: FeedOptionsMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

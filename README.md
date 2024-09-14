@@ -3,6 +3,7 @@
 A **simple**, **privacy-first**, and **open-source** Reddit client that allows users to view multiple subreddits in separate, customizable lanes. Fetches data directly from Reddit's JSON feed without tracking or third-party analytics, ensuring user privacy.
 
 ### Features:
+
 - **Add custom subreddit lanes**: View posts from different subreddits side by side.
 - **No tracking or data collection**: 100% privacy-first, with no external analytics.
 - **Responsive layout**: Optimized for desktop and mobile viewing.
@@ -10,6 +11,7 @@ A **simple**, **privacy-first**, and **open-source** Reddit client that allows u
 - **Simple and fast**: Minimalist UI focused on performance and usability.
 
 Contributions welcome! This project aims to be simple, clean, and privacy-respecting.
+
 ## Getting Started
 
 First, run the development server:

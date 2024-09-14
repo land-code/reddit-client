@@ -44,6 +44,7 @@ export default function AddFeedButton() {
       setState({ status: 'error', error: new Error('An error occurred') })
     }
   }
+
   return (
     <Dialog
       open={state.status !== 'close'}

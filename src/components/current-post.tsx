@@ -45,7 +45,7 @@ export default function CurrentPost() {
   return (
     <article className='flex flex-col gap-4'>
       <header className='flex flex-col gap-4'>
-        <div className='flex gap-4 items-center sticky top-0 p-4 bg-transparent backdrop-blur-md'>
+        <div className='sticky top-0 flex items-center gap-4 bg-transparent p-4 backdrop-blur-md'>
           <AddFeedButton />
           <h1>{postTitle}</h1>
         </div>
@@ -53,7 +53,7 @@ export default function CurrentPost() {
           href={postUrl}
           target='_blank'
           rel='noreferrer noopener'
-          className='text-blue-500 px-4'
+          className='px-4 text-blue-500'
         >
           {postUrl}
         </a>
@@ -72,12 +72,12 @@ export default function CurrentPost() {
               <li key={index}>
                 <Card>
                   <CardContent>
-                    <CardHeader className='flex-row items-center gap-2 px-0 pb-0 space-y-0 text-zinc-400'>
-                      <CardTitle className='text-lg text-zinc-400 font-normal'>
+                    <CardHeader className='flex-row items-center gap-2 space-y-0 px-0 pb-0 text-zinc-400'>
+                      <CardTitle className='text-lg font-normal text-zinc-400'>
                         {data.author}
                       </CardTitle>
                       <span>·</span>
-                      <p className='text-sm p-0 mt-0'>{lastUpdated}</p>
+                      <p className='mt-0 p-0 text-sm'>{lastUpdated}</p>
                     </CardHeader>
                     <Markdown className={markdownStyles.reactMarkDown}>
                       {data.body}

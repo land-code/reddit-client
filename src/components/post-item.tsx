@@ -17,8 +17,7 @@ export default function PostItem({ post }: PostItemProps) {
   return (
     <li>
       <button
-        className={`w-full border-b-2 px-4 py-2 text-start cursor-pointer hover:bg-zinc-300 dark:hover:bg-zinc-800 
-          ${actualPostId === id ? 'bg-zinc-300 dark:bg-zinc-800' : ''}`}
+        className={`w-full cursor-pointer border-b-2 px-4 py-2 text-start hover:bg-zinc-300 dark:hover:bg-zinc-800 ${actualPostId === id ? 'bg-zinc-300 dark:bg-zinc-800' : ''}`}
         onClick={() => setActualPostId(id)}
       >
         <article className='flex items-center gap-8'>

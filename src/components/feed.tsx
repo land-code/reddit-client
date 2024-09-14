@@ -39,9 +39,9 @@ export default function Feed({ feedName }: FeedProps) {
   }, [feedName, displayData])
 
   return (
-    <li className='w-full max-w-lg h-full border-r-2'>
-      <article className='flex flex-col py-4 gap-4 w-full h-full'>
-        <header className='flex gap-4 items-center px-4 justify-between'>
+    <li className='h-full w-full max-w-lg border-r-2'>
+      <article className='flex h-full w-full flex-col gap-4 py-4'>
+        <header className='flex items-center justify-between gap-4 px-4'>
           <h2>{feedName}</h2>
           <FeedOptionsMenu feedName={feedName} onRefresh={displayData} />
         </header>
@@ -52,11 +52,9 @@ export default function Feed({ feedName }: FeedProps) {
           )}
           {feed && (
             <ul className='flex flex-col'>
-              {feed.data.children
-                .slice(0, 10)
-                .map(({ data }, index) => (
-                  <PostItem post={data} key={index} />
-                ))}
+              {feed.data.children.slice(0, 10).map(({ data }, index) => (
+                <PostItem post={data} key={index} />
+              ))}
             </ul>
           )}
         </main>
